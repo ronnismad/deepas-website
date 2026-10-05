@@ -1,16 +1,487 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Deepas.in</title>
-    <style>
-        body { font-family: Arial, sans-serif; text-align: center; margin-top: 100px; background-color: #f4f4f9; color: #333; }
-        h1 { color: #f6821f; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Deepa's — Handwoven Sarees from Bengal</title>
+  <meta name="description" content="Deepa's is a West Bengal boutique by two sisters, Kamelia and Mistu. Traditionally handwoven sarees from the state's great looms — Shantipur, Phulia, Begampur, Dhaniakhali, Bishnupur and Murshidabad — priced for everyone." />
+  <meta name="theme-color" content="#F0E5D8" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Jost:wght@300;400;500;600&family=Tiro+Bangla:ital@0;1&family=Hind+Siliguri:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%23F0E5D8'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='40' font-style='italic' text-anchor='middle' fill='%233F1414'%3ED%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-    <h1>Welcome to Deepas.in!</h1>
-    <p>This is my new one-page website.</p>
+
+  <!-- ===== Bengali motif sprite (alpana / tant symbols) ===== -->
+  <svg class="sprite" aria-hidden="true" focusable="false" width="0" height="0">
+    <defs>
+      <symbol id="i-phool" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <circle cx="12" cy="12" r="2.3" />
+          <ellipse cx="12" cy="6.4" rx="2.5" ry="4.1" />
+          <ellipse cx="12" cy="17.6" rx="2.5" ry="4.1" />
+          <ellipse cx="6.4" cy="12" rx="4.1" ry="2.5" />
+          <ellipse cx="17.6" cy="12" rx="4.1" ry="2.5" />
+        </g>
+      </symbol>
+      <symbol id="i-ardha" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M3.5 15.5a8.5 8.5 0 0 1 17 0" />
+          <path d="M2 17.5h20" />
+          <circle cx="12" cy="13.5" r="1.6" />
+        </g>
+      </symbol>
+      <symbol id="i-kalka" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M12.5 2.5c5 0 9 4.6 9 10.1 0 4.6-3.1 8.4-7.2 8.4-3.1 0-5.6-2.1-5.6-4.9 0-2.5 1.9-4.4 4.2-4.4 1.9 0 3.2 1.4 3.2 3.1 0 1.3-1 2.4-2.3 2.4" />
+        </g>
+      </symbol>
+      <symbol id="i-tara" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round">
+          <path d="M12 2.5l2.1 7.4 7.4 2.1-7.4 2.1L12 21.5l-2.1-7.4L2.5 12l7.4-2.1z" />
+        </g>
+      </symbol>
+      <symbol id="i-chandmala" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M2.5 7.5q9.5 9 19 0" />
+          <circle cx="6" cy="9.8" r="2" />
+          <circle cx="12" cy="13.4" r="2" />
+          <circle cx="18" cy="9.8" r="2" />
+        </g>
+      </symbol>
+      <symbol id="i-benki" viewBox="0 0 24 24">
+        <g fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round">
+          <path d="M12 12.4a1.9 1.9 0 1 1 1.9-1.9 4 4 0 1 1-4 4 6.3 6.3 0 1 1 6.3-6.3" />
+        </g>
+      </symbol>
+      <ellipse id="alpana-petal" cx="200" cy="142" rx="15" ry="47" />
+    </defs>
+  </svg>
+
+  <div class="scroll-progress" aria-hidden="true"><span id="progressBar"></span></div>
+
+  <!-- ================= NAV ================= -->
+  <header class="nav" id="nav">
+    <a class="nav__brand" href="#home" aria-label="Deepa's — home">
+      <span class="nav__mark">D</span>
+      <span class="nav__name">Deepa's<small>দীপা'স</small></span>
+    </a>
+
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#about" data-i18n="nav.about">About</a>
+      <a href="#weavers" data-i18n="nav.weavers">Weavers</a>
+      <a href="#collections" data-i18n="nav.collections">Collections</a>
+      <a href="#terms" data-i18n="nav.terms">Terms</a>
+      <span class="lang-switch" role="group" aria-label="Language / ভাষা">
+        <button type="button" data-lang="en" class="is-active" lang="en">EN</button>
+        <button type="button" data-lang="bn" lang="bn">বাং</button>
+      </span>
+      <a href="#contact" class="nav__cta" data-i18n="nav.cta">Enquire</a>
+    </nav>
+
+    <button class="nav__toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ================= HERO ================= -->
+  <section class="hero" id="home">
+    <div class="hero__content">
+      <p class="hero__eyebrow reveal" data-i18n="hero.eyebrow">Handwoven in Bengal · Small batches</p>
+      <p class="hero__bangla reveal" lang="bn">দীপা'স</p>
+      <h1 class="hero__title">
+        <span class="hero__word reveal" data-i18n="hero.title">Deepa's</span>
+      </h1>
+      <p class="hero__sub reveal" data-i18n="hero.sub">Boutique Saree Collection</p>
+      <p class="hero__lede reveal" data-i18n="hero.lede">Heirloom sarees from Bengal's legendary looms — Shantipur and Phulia cottons, Bishnupur Baluchari, Dhaniakhali, Begampur and Murshidabad silk — chosen thread by thread, priced for everyone.</p>
+      <div class="hero__actions reveal">
+        <a class="btn btn--solid" href="#collections" data-i18n="hero.b1">View sarees</a>
+        <a class="btn btn--ghost" href="#about" data-i18n="hero.b2">Our story</a>
+      </div>
+    </div>
+
+    <a class="scroll-hint" href="#about" aria-label="Scroll to About">
+      <span class="scroll-hint__label" data-i18n="hero.scroll">Scroll</span>
+      <span class="scroll-hint__line"></span>
+    </a>
+  </section>
+
+  <!-- ================= TANT BORDER + HUB BAND ================= -->
+  <div class="tant-band" aria-hidden="true"></div>
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span><i>❋</i><b data-i18n="band.1">Shantipur</b><i>❋</i><b data-i18n="band.2">Phulia</b><i>❋</i><b data-i18n="band.3">Begampur</b><i>❋</i><b data-i18n="band.4">Dhaniakhali</b><i>❋</i><b data-i18n="band.5">Bishnupur</b><i>❋</i><b data-i18n="band.6">Murshidabad</b><i>❋</i><b data-i18n="band.7">Santiniketan</b><i>❋</i>&nbsp;</span>
+      <span><i>❋</i><b data-i18n="band.1">Shantipur</b><i>❋</i><b data-i18n="band.2">Phulia</b><i>❋</i><b data-i18n="band.3">Begampur</b><i>❋</i><b data-i18n="band.4">Dhaniakhali</b><i>❋</i><b data-i18n="band.5">Bishnupur</b><i>❋</i><b data-i18n="band.6">Murshidabad</b><i>❋</i><b data-i18n="band.7">Santiniketan</b><i>❋</i>&nbsp;</span>
+    </div>
+  </div>
+  <div class="tant-band tant-band--flip" aria-hidden="true"></div>
+
+  <!-- ================= ABOUT ================= -->
+  <section class="section about" id="about">
+    <div class="section__head reveal">
+      <span class="kicker">
+        <svg class="kicker__mark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-phool" /></svg>
+        <span data-i18n="about.k">01 — About · আমাদের কথা</span>
+      </span>
+      <h2 class="section__title" data-i18n-html="about.title">Two sisters, one <em>mother's dream</em></h2>
+    </div>
+
+    <div class="about__grid">
+      <div class="about__visual reveal">
+        <div class="about__frame">
+          <div class="about__portrait">
+            <span class="about__bn" lang="bn">দীপা'স</span>
+            <span class="about__monogram">K · M</span>
+          </div>
+          <div class="about__caption">
+            <span data-i18n="about.cap1">Kamelia &amp; Mistu</span>
+            <span data-i18n="about.cap2">Est. with love</span>
+          </div>
+        </div>
+        <span class="about__badge" lang="bn">মায়ের স্বপ্ন</span>
+      </div>
+
+      <div class="about__copy">
+        <p class="about__lead reveal" data-i18n="about.lead">Deepa's is an initiative of two sisters, Kamelia and Mistu. The name is their late mother's first name — Deepa — whose dream was to open a boutique of her own.</p>
+        <p class="reveal" data-i18n="about.p1">For years they bought boutique sarees that looked lovely in the shop and frayed after one wash, at prices that never quite matched what they were getting. Unsatisfied with that, the sisters decided to start their own boutique: one built to make genuinely high-quality sarees affordable, and reachable by everyone.</p>
+        <p class="reveal" data-i18n-html="about.p2">So they went to the looms themselves. Every Deepa's saree is <em>traditionally handwoven</em> by artisan families across Bengal's great weaving hubs — GI-tagged Shantipur, Begampur and Dhaniakhali cotton, the narrative Baluchari silk of Bishnupur, Murshidabad silk, and hand-stitched kantha from Santiniketan. No powerloom shortcuts, no middlemen.</p>
+        <p class="reveal" data-i18n="about.p3">Maa's name is on the door. Her dream is in every drape.</p>
+
+        <ul class="stats">
+          <li class="reveal"><strong data-i18n="about.s1n">6</strong><span data-i18n="about.s1t">Weaving hubs</span></li>
+          <li class="reveal"><strong data-i18n="about.s2n">100%</strong><span data-i18n="about.s2t">Handloom</span></li>
+          <li class="reveal"><strong data-i18n="about.s3n">40+</strong><span data-i18n="about.s3t">Weaver families</span></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div class="kantha-rule" aria-hidden="true"></div>
+
+  <!-- ================= THE LOOM ROAD / WEAVERS ================= -->
+  <section class="section weavers" id="weavers">
+    <div class="section__head reveal">
+      <span class="kicker">
+        <svg class="kicker__mark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-ardha" /></svg>
+        <span data-i18n="weavers.k">02 — The loom road · তাঁতের পথ</span>
+      </span>
+      <h2 class="section__title" data-i18n-html="weavers.title">Six towns, one <em>handloom belt</em></h2>
+      <p class="section__sub" data-i18n="weavers.sub">Our sarees are woven traditionally in the great saree-weaving hubs of West Bengal — in family looms that have been running for generations, most of them GI-tagged for exactly the cloth they make.</p>
+    </div>
+
+    <div class="loom-road reveal" aria-hidden="true"><span class="loom-road__stitch"></span></div>
+
+    <ol class="hubs">
+      <li class="hub reveal">
+        <span class="hub__no">01</span>
+        <h3 class="hub__name"><span lang="bn">শান্তিপুর</span> Shantipur</h3>
+        <p class="hub__where" data-i18n="hub.1.d">Nadia district · cotton tant</p>
+        <p class="hub__fact" data-i18n="hub.1.f">Weaving here dates to 1409. The Shantipuri sari has carried a GI tag since 2009 and is still folded the old way, in the Guti Bhanj.</p>
+        <span class="hub__badge" data-i18n="hub.gi">GI tagged</span>
+      </li>
+      <li class="hub reveal">
+        <span class="hub__no">02</span>
+        <h3 class="hub__name"><span lang="bn">ফুলিয়া</span> Phulia</h3>
+        <p class="hub__where" data-i18n="hub.2.d">Nadia district · Tangail &amp; jamdani</p>
+        <p class="hub__fact" data-i18n="hub.2.f">The other half of the Shantipur cluster: 12,000 looms and 36,000 weavers, the densest stretch of handlooms in Bengal.</p>
+        <span class="hub__badge" data-i18n="hub.cluster">Shantipur cluster</span>
+      </li>
+      <li class="hub reveal">
+        <span class="hub__no">03</span>
+        <h3 class="hub__name"><span lang="bn">বেগমপুর</span> Begampur</h3>
+        <p class="hub__where" data-i18n="hub.3.d">Hooghly district · cotton tant</p>
+        <p class="hub__fact" data-i18n="hub.3.f">Matapar and Booty borders on a khatkhti loom, a craft recorded here since the 16th century and GI-tagged in 2026.</p>
+        <span class="hub__badge" data-i18n="hub.gi">GI tagged</span>
+      </li>
+      <li class="hub reveal">
+        <span class="hub__no">04</span>
+        <h3 class="hub__name"><span lang="bn">ধনিয়াখালি</span> Dhaniakhali</h3>
+        <p class="hub__where" data-i18n="hub.4.d">Hooghly district · cotton tant</p>
+        <p class="hub__fact" data-i18n="hub.4.f">100 × 100 thread count, a 1.5–2 inch border and the traditional grey body — the plain, honest everyday saree.</p>
+        <span class="hub__badge" data-i18n="hub.gi">GI tagged</span>
+      </li>
+      <li class="hub reveal">
+        <span class="hub__no">05</span>
+        <h3 class="hub__name"><span lang="bn">বিষ্ণুপুর</span> Bishnupur</h3>
+        <p class="hub__where" data-i18n="hub.5.d">Bankura district · Baluchari silk</p>
+        <p class="hub__fact" data-i18n="hub.5.f">Terracotta temple scenes lifted straight onto the pallu — Mahabharata episodes woven into silk over five or six days. GI since 2011.</p>
+        <span class="hub__badge" data-i18n="hub.gi">GI tagged</span>
+      </li>
+      <li class="hub reveal">
+        <span class="hub__no">06</span>
+        <h3 class="hub__name"><span lang="bn">মুর্শিদাবাদ</span> Murshidabad</h3>
+        <p class="hub__where" data-i18n="hub.6.d">Murshidabad district · mulberry silk</p>
+        <p class="hub__fact" data-i18n="hub.6.f">Bengal's silk town since the 13th century and the source of Garad, Korial and Baluchari — fine, light and easy to drape.</p>
+        <span class="hub__badge" data-i18n="hub.silk">Silk country</span>
+      </li>
+    </ol>
+  </section>
+
+  <div class="kantha-rule" aria-hidden="true"></div>
+
+  <!-- ================= COLLECTIONS ================= -->
+  <section class="section collections" id="collections">
+    <div class="section__head reveal">
+      <span class="kicker">
+        <svg class="kicker__mark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-kalka" /></svg>
+        <span data-i18n="col.k">03 — Collections · সংগ্রহ</span>
+      </span>
+      <h2 class="section__title" data-i18n-html="col.title">Woven where it has <em>always</em> been woven</h2>
+      <p class="section__sub" data-i18n="col.sub">Six families of cloth, each from the town that gave it its name. Prices stay honest because we buy at the loom.</p>
+    </div>
+
+    <div class="cards">
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--ivory">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m1" width="44" height="44" patternUnits="userSpaceOnUse">
+              <use href="#i-ardha" x="10" y="10" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m1)" />
+          </svg>
+          <span class="card__num">01</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.1.t">Shantipuri Tant</h3>
+          <p data-i18n="col.1.p">Feather-light cotton with extra-weft motifs worked in by hand, woven at Shantipur and folded the Guti Bhanj way.</p>
+          <p class="card__meta" data-i18n="col.1.m">Cotton · Shantipur, Nadia · GI 2009</p>
+        </div>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--everyday">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m2" width="40" height="40" patternUnits="userSpaceOnUse">
+              <use href="#i-phool" x="8" y="8" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m2)" />
+          </svg>
+          <span class="card__num">02</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.2.t">Begampuri Tant</h3>
+          <p data-i18n="col.2.p">Contrasting body and border, Matapar and Booty patterns, on the khatkhti frame loom the town has used for centuries.</p>
+          <p class="card__meta" data-i18n="col.2.m">Cotton · Begampur, Hooghly · GI 2026</p>
+        </div>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--noir">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m3" width="46" height="46" patternUnits="userSpaceOnUse">
+              <use href="#i-ardha" x="11" y="11" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m3)" />
+          </svg>
+          <span class="card__num">03</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.3.t">Dhaniakhali Tant</h3>
+          <p data-i18n="col.3.p">The workaday saree done properly — 100 × 100 count, a firm inch-and-a-half border, traditionally left in its natural grey.</p>
+          <p class="card__meta" data-i18n="col.3.m">Cotton · Dhaniakhali, Hooghly · GI</p>
+        </div>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--bridal">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m4" width="52" height="52" patternUnits="userSpaceOnUse">
+              <use href="#i-kalka" x="14" y="14" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m4)" />
+          </svg>
+          <span class="card__num">04</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.4.t">Baluchari Silk</h3>
+          <p data-i18n="col.4.p">A whole epic on the pallu: Mahabharata and Ramayana scenes drawn from Bishnupur's terracotta walls, a week on the loom.</p>
+          <p class="card__meta" data-i18n="col.4.m">Silk · Bishnupur, Bankura · GI 2011</p>
+        </div>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--silk">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m5" width="42" height="42" patternUnits="userSpaceOnUse">
+              <use href="#i-chandmala" x="9" y="9" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m5)" />
+          </svg>
+          <span class="card__num">05</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.5.t">Murshidabad Garad</h3>
+          <p data-i18n="col.5.p">Undyed mulberry silk with a woven border — the auspicious white-and-maroon saree, light enough to drape all day.</p>
+          <p class="card__meta" data-i18n="col.5.m">Silk · Murshidabad · GI registered</p>
+        </div>
+      </article>
+
+      <article class="card reveal" data-tilt>
+        <div class="card__art card__art--festive">
+          <svg class="card__motif" aria-hidden="true">
+            <defs><pattern id="m6" width="44" height="44" patternUnits="userSpaceOnUse">
+              <use href="#i-tara" x="10" y="10" width="24" height="24" />
+            </pattern></defs>
+            <rect width="100%" height="100%" fill="url(#m6)" />
+          </svg>
+          <span class="card__num">06</span>
+        </div>
+        <div class="card__body">
+          <h3 data-i18n="col.6.t">Nakshi Kantha</h3>
+          <p data-i18n="col.6.p">Not a loom but a needle: running-stitch embroidery in flowers, birds and geometry, made by hand around Santiniketan.</p>
+          <p class="card__meta" data-i18n="col.6.m">Cotton · Santiniketan, Birbhum · GI</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ================= BANNER ================= -->
+  <section class="banner">
+    <div class="banner__bg" aria-hidden="true">
+      <svg class="alpana alpana--banner" viewBox="0 0 400 400">
+        <use href="#alpana-petal" transform="rotate(15 200 200)" />
+        <use href="#alpana-petal" transform="rotate(75 200 200)" />
+        <use href="#alpana-petal" transform="rotate(135 200 200)" />
+        <use href="#alpana-petal" transform="rotate(195 200 200)" />
+        <use href="#alpana-petal" transform="rotate(255 200 200)" />
+        <use href="#alpana-petal" transform="rotate(315 200 200)" />
+        <circle cx="200" cy="200" r="188" fill="none" stroke="currentColor" stroke-width="1" />
+        <circle cx="200" cy="200" r="66" fill="none" stroke="currentColor" stroke-width="1" />
+      </svg>
+    </div>
+    <blockquote class="banner__quote reveal">
+      <p data-i18n-html="banner.q">High quality should never be a <em>luxury</em>.</p>
+      <cite data-i18n="banner.c">— Kamelia &amp; Mistu, founders</cite>
+    </blockquote>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section class="section contact" id="contact">
+    <div class="section__head reveal">
+      <span class="kicker">
+        <svg class="kicker__mark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-benki" /></svg>
+        <span data-i18n="contact.k">04 — Contact · যোগাযোগ</span>
+      </span>
+      <h2 class="section__title" data-i18n-html="contact.title">Tell us what you are <em>looking for</em></h2>
+      <p class="section__sub" data-i18n="contact.sub">A wedding, a gift, an everyday saree you will actually wear — write to us and we will pull together options from the looms.</p>
+    </div>
+
+    <div class="contact__grid">
+      <form class="form reveal" id="contactForm" novalidate>
+        <div class="field">
+          <label for="name" data-i18n="form.name">Name</label>
+          <input type="text" id="name" name="name" autocomplete="name" data-i18n-ph="form.namePh" placeholder="Your name" />
+        </div>
+        <div class="field">
+          <label for="email" data-i18n="form.email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" data-i18n-ph="form.emailPh" placeholder="you@example.com" />
+        </div>
+        <div class="field">
+          <label for="topic" data-i18n="form.topic">Interested in</label>
+          <select id="topic" name="topic">
+            <option data-i18n="form.t1">Everyday tant</option>
+            <option data-i18n="form.t2">Silk &amp; occasion</option>
+            <option data-i18n="form.t3">Bridal &amp; trousseau</option>
+            <option data-i18n="form.t4">Kantha &amp; hand-work</option>
+            <option data-i18n="form.t5">Something else</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message" data-i18n="form.msg">Message</label>
+          <textarea id="message" name="message" rows="4" data-i18n-ph="form.msgPh" placeholder="Colours, length, budget, occasion…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--solid btn--full" data-i18n="form.send">Send enquiry</button>
+        <p class="form__note" id="formNote" role="status" aria-live="polite"></p>
+      </form>
+
+      <div class="contact__aside">
+        <div class="info reveal">
+          <h4 data-i18n="info1.t">Write to us</h4>
+          <p><a href="mailto:hello@deepas.example">hello@deepas.example</a></p>
+        </div>
+        <div class="info reveal">
+          <h4 data-i18n="info2.t">Call the boutique</h4>
+          <p><a href="tel:+910000000000">+91 00000 00000</a></p>
+        </div>
+        <div class="info reveal">
+          <h4 data-i18n="info3.t">Studio</h4>
+          <p data-i18n="info3.p">Kolkata, West Bengal — visits by appointment.</p>
+        </div>
+        <div class="info reveal">
+          <h4 data-i18n="info4.t">Hours</h4>
+          <p data-i18n="info4.p">Tue – Sun · 11:00 – 19:00 IST</p>
+        </div>
+        <div class="socials reveal">
+          <a href="#" rel="noopener">Instagram</a>
+          <a href="#" rel="noopener">Facebook</a>
+          <a href="#" rel="noopener">WhatsApp</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="kantha-rule" aria-hidden="true"></div>
+
+  <!-- ================= TERMS ================= -->
+  <section class="section terms" id="terms">
+    <div class="section__head reveal">
+      <span class="kicker">
+        <svg class="kicker__mark" viewBox="0 0 24 24" aria-hidden="true"><use href="#i-tara" /></svg>
+        <span data-i18n="terms.k">05 — Terms · শর্তাবলী</span>
+      </span>
+      <h2 class="section__title" data-i18n-html="terms.title">Small shop, <em>plain rules</em></h2>
+    </div>
+
+    <div class="terms__list">
+      <details class="term reveal">
+        <summary data-i18n="terms.1.t">Ordering &amp; payment</summary>
+        <div class="term__body"><p data-i18n="terms.1.p">Orders are confirmed once payment is received. We accept UPI, cards and bank transfer. Because every saree is handwoven, pieces are reserved for 48 hours while you decide.</p></div>
+      </details>
+      <details class="term reveal">
+        <summary data-i18n="terms.2.t">Shipping within India</summary>
+        <div class="term__body"><p data-i18n="terms.2.p">Dispatched from Kolkata within 2–4 working days and delivered across India in roughly a week. Handloom pieces travel folded in muslin, never in plastic.</p></div>
+      </details>
+      <details class="term reveal">
+        <summary data-i18n="terms.3.t">Returns &amp; exchange</summary>
+        <div class="term__body"><p data-i18n="terms.3.p">Unworn sarees with tags intact may be returned within 7 days of delivery for an exchange or credit. Sale and altered pieces are final.</p></div>
+      </details>
+      <details class="term reveal">
+        <summary data-i18n="terms.4.t">Caring for handloom cloth</summary>
+        <div class="term__body"><p data-i18n="terms.4.p">Soak cotton tant once in cold salted water to set the colour, wash mild, starch lightly and dry in shade. Dry-clean silks. Slubs, uneven selvedge and slight shade variation are the signature of the hand, not a defect.</p></div>
+      </details>
+      <details class="term reveal">
+        <summary data-i18n="terms.5.t">Authenticity</summary>
+        <div class="term__body"><p data-i18n="terms.5.p">Where a cloth carries a Geographical Indication, we name the town it comes from and the tag it holds. If a piece turns out not to be handwoven as described, we will refund it in full.</p></div>
+      </details>
+    </div>
+    <p class="terms__updated" data-i18n="terms.upd">Last updated — October 2026.</p>
+  </section>
+
+  <!-- ================= FOOTER ================= -->
+  <div class="tant-band" aria-hidden="true"></div>
+  <footer class="footer">
+    <div class="footer__top">
+      <div class="footer__brand">
+        <span class="footer__logo">Deepa's</span>
+        <span class="footer__tag" data-i18n="footer.tag">Handwoven in West Bengal</span>
+      </div>
+      <nav class="footer__nav" aria-label="Footer">
+        <a href="#about" data-i18n="nav.about">About</a>
+        <a href="#weavers" data-i18n="nav.weavers">Weavers</a>
+        <a href="#collections" data-i18n="nav.collections">Collections</a>
+        <a href="#contact" data-i18n="nav.contact">Contact</a>
+        <a href="#terms" data-i18n="nav.terms">Terms</a>
+      </nav>
+      <a class="footer__up" href="#home" aria-label="Back to top">↑</a>
+    </div>
+    <div class="footer__bottom">
+      <span>© <span id="year">2026</span> Deepa's · <span lang="bn">দীপা'স</span></span>
+      <span data-i18n="footer.by">An initiative of Kamelia &amp; Mistu</span>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
 </body>
 </html>
