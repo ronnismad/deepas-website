@@ -160,17 +160,28 @@ p { margin: 0 0 1.1em; }
   justify-content: space-between;
   gap: 1rem;
   padding: 1.15rem clamp(1.25rem, 5vw, 3rem);
-  transition: padding 0.5s var(--ease), background 0.5s var(--ease),
-              box-shadow 0.5s var(--ease), backdrop-filter 0.5s var(--ease);
+  transition: padding 0.5s var(--ease);
 }
-.nav.scrolled {
-  padding-top: 0.7rem;
-  padding-bottom: 0.7rem;
+/* frosted scrolled state lives on a pseudo: a backdrop-filter on .nav itself
+   would make it the containing block for the fixed mobile menu (inset: 0 would
+   then resolve against the header bar, leaving the page visible behind it) */
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
   background: rgba(240, 229, 216, 0.82);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 var(--line), 0 18px 40px -34px rgba(63, 20, 20, 0.6);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
 }
+.nav.scrolled {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
+}
+.nav.scrolled::before { opacity: 1; }
 .nav__brand {
   display: inline-flex;
   align-items: center;
@@ -1201,9 +1212,7 @@ html[lang="bn"] .hub__name { font-size: clamp(1.4rem, 2.2vw, 1.7rem); }
     align-items: center;
     justify-content: center;
     gap: 2rem;
-    background: rgba(240, 229, 216, 0.97);
-    backdrop-filter: blur(18px);
-    -webkit-backdrop-filter: blur(18px);
+    background: var(--bg);
     opacity: 0;
     visibility: hidden;
     transform: translateY(-12px);
